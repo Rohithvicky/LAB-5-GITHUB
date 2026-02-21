@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feature/DockerContainers
+      - main
   workflow_dispatch:
 
 jobs:
