@@ -1,14 +1,12 @@
 name: Docker Build
 
 on:
-  push:
-    branches: 
-      - master
-      - feature/DockerContainers
+  workflow_dispatch:   # allows manual run from Actions tab
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       # Step 1: Checkout code
       - name: Checkout repository
@@ -33,13 +31,11 @@ jobs:
       - name: Run container
         run: |
           docker run -d --name test-container ${{ secrets.DOCKERHUB_USERNAME }}/my-python-app:latest
-          docker ps -a   # show container status
+          docker ps -a
 
       # Step 5: Stop container
       - name: Stop container
         run: docker stop test-container
 
       # Step 6: Remove container
-      - name: Remove container
         run: docker rm test-container
-
